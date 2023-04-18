@@ -1,14 +1,16 @@
 # ihp-tailwind-bootstrapper
 
-ihp-tailwind-bootstrapper allows you to use the tailwind standalone compiler with IHP without adding npm, and has cross-platform support.
+ihp-tailwind-bootstrapper allows you to use the tailwind standalone compiler with IHP **without adding npm**, and has cross-platform support.
 
-Adding npm/nodejs only for Tailwind adds way too much complexity. Avoiding npm makes it also much easier to deploy, for example when deploying IHP apps to Shipnix.
+Adding npm/nodejs only for Tailwind adds way too much complexity for this one tool, so better avoid it if you can.
+
+Avoiding npm also makes your app faster and easier to deploy.
 
 This also better ensures that your project's frontend assets doesn't break due to changes in npm.
 
 ## Install
 
-In the root of your ihp project, pull the repository and delete the `.git` folder with this one-lines
+In the root of your ihp project, pull the repository and delete the `.git` folder in the tailwind folder with this one-lines
 
 ```sh
 git clone https://github.com/ship-nix/ihp-tailwind-bootstrapper.git tailwind && rm -rf tailwind/.git
@@ -43,13 +45,13 @@ After this, you can check these file into version control.
 
 The `tailwindcss-linux-x64` file is required for building tailwind on a NixOS server with x64. It's better to have this checked into git instead of trying to download it while building.
 
-The other Tailwind binaries are not necessary to check into version control as they can be downloaded automatically as needed.
+The other Tailwind binaries are not necessary to check into version control as they can be downloaded automatically as needed during development.
 
 ## How to use
 
 For deploying with Shipnix, Tailwind should now just work.
 
-If it doesn't work, make sure that `static/app.css` is being bundled in the `Makefile`:
+If it doesn't work, ensure that `static/app.css` is being bundled in the `Makefile`:
 
 ```sh
 CSS_FILES += static/app.css
@@ -77,4 +79,24 @@ Alternatively, you can replace the `RunDevServer` line in your `./start` script 
 ```sh
 # Finally start the dev server
 wait & make tailwind-dev & RunDevServer
+```
+
+## Update Tailwind version
+
+If you require a newer version of tailwind, you can delete the `tailwind/binary` folder:
+
+```sh
+rm -rf tailwind/binary
+```
+
+Then in the `tailwind/tailwindcss` bash script, change the `tag` to an [actual Tailwind release](https://github.com/tailwindlabs/tailwindcss/releases):
+
+```bash
+tag="v3.3.1"
+```
+
+Then run the tailwind script to install the new packages:
+
+```
+bash tailwind/tailwindcss
 ```

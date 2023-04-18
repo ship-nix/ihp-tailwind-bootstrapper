@@ -43,6 +43,23 @@ git add .gitignore
 
 For deploying with Shipnix, Tailwind should now just work.
 
+### Use in development
+
+For running the development version, you can run this line:
+
+```sh
+nix-shell --run 'make tailwind-dev'
+```
+
+Optionally, you can replace the `RunDevServer` line in your `./start` script with this to run Tailwind automatically when running the IHP development server.
+
+```sh
+# Finally start the dev server
+wait & make tailwind-dev & RunDevServer
+```
+
+### Troubleshooting
+
 If it doesn't work, ensure that `static/app.css` is being bundled in the `Makefile`:
 
 ```sh
@@ -58,19 +75,6 @@ stylesheets = [hsx|
         <link rel="stylesheet" href={assetPath "/vendor/flatpickr.min.css"}/>
         <link rel="stylesheet" href={assetPath "/app.css"}/>
     |]
-```
-
-For running the development version, you can run this line:
-
-```sh
-nix-shell --run 'make tailwind-dev'
-```
-
-Alternatively, you can replace the `RunDevServer` line in your `./start` script with this to run Tailwind automatically when running the IHP development server.
-
-```sh
-# Finally start the dev server
-wait & make tailwind-dev & RunDevServer
 ```
 
 ## Update Tailwind version

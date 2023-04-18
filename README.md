@@ -101,7 +101,7 @@ The other Tailwind binaries are not necessary to check into version control as t
 
 ## Q: How do I use non-official Tailwind plugins without npm?
 
-Let's take `tailwind-elements` as an example.
+Let's take [tailwind-elements](https://tailwind-elements.com/) as an example.
 
 First, we can create a `plugins` folder inside the tailwind directory.
 

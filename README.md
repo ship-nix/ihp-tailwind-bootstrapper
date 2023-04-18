@@ -10,7 +10,7 @@ This also better ensures that your project's frontend assets doesn't break due t
 
 ## Install
 
-In the root of your ihp project, pull the repository and delete the `.git` folder in the tailwind folder with this one-lines
+From the root of your ihp project, pull the repository and delete the `.git` folder in the tailwind folder with this one-lines
 
 ```sh
 git clone https://github.com/ship-nix/ihp-tailwind-bootstrapper.git tailwind && rm -rf tailwind/.git
@@ -38,14 +38,6 @@ git rm -f static/app.css # Remove the existing app.css
 printf '\nstatic/app.css' >> .gitignore
 git add .gitignore
 ```
-
-After this, you can check these file into version control.
-
-## Why is only the `tailwind/binary/tailwindcss-linux-x64` being checked into version control?
-
-The `tailwindcss-linux-x64` file is required for building tailwind on a NixOS server with x64. It's better to have this checked into git instead of trying to download it while building.
-
-The other Tailwind binaries are not necessary to check into version control as they can be downloaded automatically as needed during development.
 
 ## How to use
 
@@ -100,3 +92,9 @@ Then run the tailwind script to install the new packages:
 ```
 bash tailwind/tailwindcss
 ```
+
+## Q: Why is only the `tailwind/binary/tailwindcss-linux-x64` being checked into version control?
+
+The `tailwindcss-linux-x64` file is required for building tailwind on a NixOS server with x64. It's better to have this checked into git instead of trying to download it while building.
+
+The other Tailwind binaries are not necessary to check into version control as they can be downloaded automatically as needed during development.

@@ -10,7 +10,7 @@ This also better ensures that your project's frontend assets doesn't break due t
 
 ## Install
 
-From the root of your ihp project, pull the repository and delete the `.git` folder in the tailwind folder with this one-lines
+From the root of your ihp project, pull the repository and delete the `.git` folder in the tailwind folder with this one-liner:
 
 ```sh
 git clone https://github.com/ship-nix/ihp-tailwind-bootstrapper.git tailwind && rm -rf tailwind/.git

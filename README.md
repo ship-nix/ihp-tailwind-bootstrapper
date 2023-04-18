@@ -4,7 +4,7 @@ ihp-tailwind-bootstrapper allows you to use the [Tailwind Standalone CLI](https:
 
 Adding npm/nodejs only for Tailwind adds way too much complexity for this one tool, so better avoid it if you can.
 
-Avoiding npm and instead using a pre-build binary makes your app faster and easier to deploy.
+Avoiding npm and instead using a pre-built binary makes your app faster and easier to deploy.
 
 This also better ensures that your project's frontend assets doesn't break due to changes in npm.
 
@@ -112,6 +112,8 @@ mkdir -p tailwind/plugins
 You can browse files for a distribution build at jsDeliver: https://cdn.jsdelivr.net/npm/tw-elements/dist/
 
 In this case, you can take the `plugin.cjs` and save it into the `plugins` folder as `tailwind/plugins/tw-elements.cjs`.
+
+Here is a one-liner you can run at the root of your IHP project:
 
 ```sh
 curl -L -o tailwind/plugins/tw-elements.cjs https://cdn.jsdelivr.net/npm/tw-elements@1.0.0-beta2/dist/plugin.cjs

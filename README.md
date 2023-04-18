@@ -137,6 +137,6 @@ module.exports = {
 };
 ```
 
-If you also require the JavaScript this library provides, you can just download `tw-elements.umd.min.js` from jsDeliver `and place it into your `static` folder, import it into your html, and your done!
+If you also require the JavaScript this library provides, you can just download `tw-elements.umd.min.js` from jsDeliver and place it into your `static` folder, import it into your html, and your done!
 
 Yes, this is a primitive way of working, and against the pattern of tapping into the vastly complex ecosystem that is npm, but also saves you from complexity, future headaches and even potential security issues.

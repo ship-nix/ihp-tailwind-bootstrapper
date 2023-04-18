@@ -1,0 +1,124 @@
+#!/bin/bash
+
+# Destination directory where binaries are stored
+dest_dir="tailwind/binary"
+
+# Function to check if a file exists and is executable
+is_executable() {
+  [[ -x "$1" ]]
+}
+
+tag="v3.3.1"
+
+install_tailwindcss_binaries() {
+  # List of files to download
+  files=(
+    "https://github.com/tailwindlabs/tailwindcss/releases/download/${tag}/tailwindcss-linux-arm64"
+    "https://github.com/tailwindlabs/tailwindcss/releases/download/${tag}/tailwindcss-linux-armv7"
+    "https://github.com/tailwindlabs/tailwindcss/releases/download/${tag}/tailwindcss-linux-x64"
+    "https://github.com/tailwindlabs/tailwindcss/releases/download/${tag}/tailwindcss-macos-arm64"
+    "https://github.com/tailwindlabs/tailwindcss/releases/download/${tag}/tailwindcss-macos-x64"
+    "https://github.com/tailwindlabs/tailwindcss/releases/download/${tag}/tailwindcss-windows-arm64.exe"
+    "https://github.com/tailwindlabs/tailwindcss/releases/download/${tag}/tailwindcss-windows-x64.exe"
+  )
+
+  # Create a temporary directory for downloaded files
+  temp_dir=$(mktemp -d)
+
+  # Download, save and make files executable
+  for file_url in "${files[@]}"; do
+    echo "Downloading ${file_url}..."
+    file_name="$(basename "${file_url}")"
+    file_path="${temp_dir}/${file_name}"
+    curl -L -s --progress-bar --location "${file_url}" --output "${file_path}"
+    chmod +x "${file_path}"
+  done
+
+  # Create the destination directory if it doesn't exist
+  mkdir -p "${dest_dir}"
+
+  # Copy downloaded files to the destination directory
+  echo "Copying files to ${dest_dir}..."
+  cp -r "${temp_dir}/." "${dest_dir}"
+
+    # Create the .gitignore file in the destination directory
+  echo "Creating .gitignore in ${dest_dir}..."
+  cat > "${dest_dir}/.gitignore" << EOF
+*
+!tailwindcss-linux-x64
+EOF
+
+
+  # Remove temporary directory
+  rm -rf "${temp_dir}"
+
+  echo "Done."
+}
+
+# Detect the current system and run the appropriate binary
+case "$(uname -s)" in
+  Linux)
+    case "$(uname -m)" in
+      arm64|aarch64)
+        binary="${dest_dir}/tailwindcss-linux-arm64"
+        ;;
+      armv7*)
+        binary="${dest_dir}/tailwindcss-linux-armv7"
+        ;;
+      x86_64)
+        binary="${dest_dir}/tailwindcss-linux-x64"
+        ;;
+      *)
+        echo "Unsupported architecture."
+        exit 1
+        ;;
+    esac
+    ;;
+  Darwin)
+    case "$(uname -m)" in
+      arm64)
+        binary="${dest_dir}/tailwindcss-macos-arm64"
+        ;;
+      x86_64)
+        binary="${dest_dir}/tailwindcss-macos-x64"
+        ;;
+      *)
+        echo "Unsupported architecture."
+        exit 1
+        ;;
+    esac
+    ;;
+  CYGWIN*|MINGW*|MSYS*)
+    case "$(uname -m)" in
+      arm64)
+        binary="${dest_dir}/tailwindcss-windows-arm64.exe"
+        ;;
+      x86_64)
+        binary="${dest_dir}/tailwindcss-windows-x64.exe"
+        ;;
+      *)
+        echo "Unsupported architecture."
+        exit 1
+        ;;
+    esac
+    ;;
+  *)
+    echo "Unsupported operating system."
+    exit 1
+    ;;
+esac
+
+# Check if the binary exists and is executable, then run it
+if is_executable "${binary}"; then
+  "${binary}" "$@"
+else
+  echo "Binary not found or not executable: ${binary}"
+  echo "Installing Tailwind CSS binaries..."
+  install_tailwindcss_binaries
+  if is_executable "${binary}"; then
+    "${binary}" "$@"
+  else
+    echo "Binary installation failed or still not executable: ${binary}"
+    exit 1
+  fi
+fi

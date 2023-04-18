@@ -41,7 +41,7 @@ git add .gitignore
 
 ## How to use
 
-For deploying with Shipnix, Tailwind should now just work.
+For deploying with Shipnix, vanilla NixOS, or most other deployment methods, Tailwind should just work in production.
 
 ### Use in development
 

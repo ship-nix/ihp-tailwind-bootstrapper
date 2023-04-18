@@ -98,3 +98,45 @@ bash tailwind/tailwindcss
 The `tailwindcss-linux-x64` file is required for building tailwind on a NixOS server with x64. It's better to have this checked into git instead of trying to download it while building.
 
 The other Tailwind binaries are not necessary to check into version control as they can be downloaded automatically as needed during development.
+
+## Q: How do I use non-official Tailwind plugins without npm?
+
+Let's take `tailwind-elements` as an example.
+
+First, we can create a `plugins` folder inside the tailwind directory.
+
+```
+mkdir -p tailwind/plugins
+```
+
+You can browse files for a distribution build at jsDeliver: `https://cdn.jsdelivr.net/npm/tw-elements/dist/`
+
+In this case, you can take the `plugin.cjs` and save it into the `plugins` folder as `tailwind/plugins/tw-elements.js`.
+
+```sh
+curl -L -o tailwind/plugins/tw-elements.cjs https://cdn.jsdelivr.net/npm/tw-elements@1.0.0-beta2/dist/plugin.cjs
+```
+
+Now, the plugin should work. You can then add it to your `tailwind.config.js`:
+
+```js
+const plugin = require("tailwindcss/plugin");
+const tailwindElements = require("./plugins/tw-elements.cjs");
+
+module.exports = {
+  mode: "jit",
+  theme: {
+    extend: {},
+  },
+  content: ["Web/View/**/*.hs"],
+  safelist: [
+    // Add custom class names.
+    // https://tailwindcss.com/docs/content-configuration#safelisting-classes
+  ],
+  plugins: [require("@tailwindcss/forms"), tailwindElements],
+};
+```
+
+If you also require the JavaScript this library provides, you can just download `tw-elements.umd.min.js` from jsDeliver `and place it into your`static` folder, import it into your html, and your done!
+
+Yes, this is a primitive way of working, and against the pattern of tapping into the vastly complex ecosystem that is npm, but also saves you from complexity, future headaches and even potential security issues.

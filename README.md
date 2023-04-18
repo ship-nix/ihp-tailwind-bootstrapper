@@ -111,7 +111,7 @@ mkdir -p tailwind/plugins
 
 You can browse files for a distribution build at jsDeliver: https://cdn.jsdelivr.net/npm/tw-elements/dist/
 
-In this case, you can take the `plugin.cjs` and save it into the `plugins` folder as `tailwind/plugins/tw-elements.js`.
+In this case, you can take the `plugin.cjs` and save it into the `plugins` folder as `tailwind/plugins/tw-elements.cjs`.
 
 ```sh
 curl -L -o tailwind/plugins/tw-elements.cjs https://cdn.jsdelivr.net/npm/tw-elements@1.0.0-beta2/dist/plugin.cjs

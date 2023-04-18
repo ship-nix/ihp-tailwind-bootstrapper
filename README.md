@@ -1,6 +1,6 @@
 # ihp-tailwind-bootstrapper
 
-ihp-tailwind-bootstrapper allows you to use the [tailwind standalone compiler](https://tailwindcss.com/blog/standalone-cli) with IHP **without adding npm**, and with cross-platform support.
+ihp-tailwind-bootstrapper allows you to use the [Tailwind Standalone CLI](https://tailwindcss.com/blog/standalone-cli) with IHP **without adding npm**, and with cross-platform support.
 
 Adding npm/nodejs only for Tailwind adds way too much complexity for this one tool, so better avoid it if you can.
 

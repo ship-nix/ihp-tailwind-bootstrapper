@@ -91,7 +91,7 @@ Then in the `tailwind/tailwindcss` bash script, change the `tag` to an [actual T
 tag="v3.3.1"
 ```
 
-Then run the tailwind script to install the new packages:
+Then run the tailwind script that will automatically download the correct binaries:
 
 ```
 bash tailwind/tailwindcss

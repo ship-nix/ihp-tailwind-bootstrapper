@@ -4,7 +4,7 @@ ihp-tailwind-bootstrapper allows you to use the tailwind standalone compiler wit
 
 Adding npm/nodejs only for Tailwind adds way too much complexity for this one tool, so better avoid it if you can.
 
-Avoiding npm also makes your app faster and easier to deploy.
+Avoiding npm and instead using a pre-build binary makes your app faster and easier to deploy.
 
 This also better ensures that your project's frontend assets doesn't break due to changes in npm.
 

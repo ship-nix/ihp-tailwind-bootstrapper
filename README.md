@@ -117,7 +117,7 @@ In this case, you can take the `plugin.cjs` and save it into the `plugins` folde
 curl -L -o tailwind/plugins/tw-elements.cjs https://cdn.jsdelivr.net/npm/tw-elements@1.0.0-beta2/dist/plugin.cjs
 ```
 
-Now, the plugin should work. You can then add it to your `tailwind.config.js`:
+You can then add it to your `tailwind.config.js`:
 
 ```js
 const plugin = require("tailwindcss/plugin");
@@ -136,6 +136,8 @@ module.exports = {
   plugins: [require("@tailwindcss/forms"), tailwindElements],
 };
 ```
+
+Now, the plugin should work as you recompile Tailwind.
 
 If you also require the JavaScript this library provides, you can just download `tw-elements.umd.min.js` from jsDeliver and place it into your `static` folder, import it from your html template, and your done!
 
